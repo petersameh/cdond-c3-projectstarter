@@ -41,7 +41,7 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - slack/notify:
-          channel: 'CircleCI'
+          channel: 'D03LTFGNTRR'
           custom: |
             {
               "blocks": [
