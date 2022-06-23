@@ -1,5 +1,35 @@
-version: 2.1
-
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.1
+jobs:
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          channel: ''
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
+workflows:
+  send-notification:
+    jobs:
+      - notify:
+          context: xoxb-3386111402183-3704652839205-Lq7HjfheCLXePQHSPV6r9LXk
+ 
 # commands:
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
