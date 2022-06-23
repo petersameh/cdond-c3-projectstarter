@@ -332,10 +332,9 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
-  send-notification:
-    jobs:
       - notify:
-          context: slack-secrets
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          context: variables
       # - deploy-infrastructure:
       #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
       #     filters:
