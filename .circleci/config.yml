@@ -332,7 +332,7 @@ workflows:
       # - scan-frontend:
       #     requires: [build-frontend]
       - notify:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           context: variables
       # - deploy-infrastructure:
       #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
