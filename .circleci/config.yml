@@ -44,6 +44,7 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
+            npm cache clean --force
             npm install
             npm audit fix --audit-level=critical
             npm audit fix --force
@@ -64,7 +65,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean
+            npm cache clean --force
             npm install
             npm audit fix --audit-level=critical
             npm audit fix --force
