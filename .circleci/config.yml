@@ -41,7 +41,7 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - slack/notify:
-          channel: ''
+          channel: 'https://egfwd-t3-may-22.slack.com/archives/D03DGLM7N49'
           custom: |
             {
               "blocks": [
