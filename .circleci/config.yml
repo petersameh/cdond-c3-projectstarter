@@ -24,7 +24,7 @@ commands:
           name: install ansible
           command: | 
             yum install epel-release
-            yum install ansible
+            yum install -y ansible
   install-targzip:
     description: This command is to install TAR gzip
     steps:
