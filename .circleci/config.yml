@@ -41,7 +41,7 @@ commands:
       - run:
           name: install aws
           command: |
-          sudo apt-get install awscli
+            sudo apt-get install awscli
 
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
