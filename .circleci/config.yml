@@ -41,6 +41,7 @@ commands:
       - run:
           name: install aws
           command: |
+            sudo apt-get update
             sudo apt-get install awscli
 
 #   revert-migrations:
