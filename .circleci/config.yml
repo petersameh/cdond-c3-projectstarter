@@ -22,13 +22,12 @@ commands:
     steps:
       - run:
           name: install ansible
-          command: | 
-            yum -y update
-            yum install wget
-            yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-            rpm -ivh epel-release-7-11.noarch.rpm
-            yum repolist
-            yum install ansible
+          command: |
+            sudo install -y tar gzip 
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible-playbook
   install-targzip:
     description: This command is to install TAR gzip
     steps:
@@ -36,6 +35,13 @@ commands:
           name: install tar gzip
           command: |
             yum install -y tar gzip
+  install-aws:
+    description: install aws
+    steps:
+      - run:
+          name: install aws
+          command: |
+          sudo apt-get install awscli
 
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
@@ -205,11 +211,11 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
       - checkout
+      - install-aws
       - install-ansible
-      - install-targzip
       - add_ssh_keys:
           fingerprints: ["be:81:27:1e:63:13:cc:41:2c:9f:42:76:e3:8d:76:de"]
       - attach_workspace:
