@@ -365,7 +365,7 @@ workflows:
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - notify:
-          requires: [deploy-infrastructure, configure-infrastructure, test-frontend, test-backend, scan-frontend, scan-backend]
+          requires: [configure-infrastructure]
           context: variables
       # - run-migrations:
       #     requires: [configure-infrastructure]
