@@ -24,6 +24,8 @@ commands:
           name: install ansible
           command: | 
             yum update
+            yum install epel-release
+            rpm –ivh epel-release-latest-5.noarch.rpm
             yum install ansible
   install-targzip:
     description: This command is to install TAR gzip
