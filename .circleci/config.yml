@@ -24,7 +24,7 @@ commands:
           name: install ansible
           command: | 
             sudo yum update
-            sudo apt install ansible
+            sudo yum install ansible
 
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
