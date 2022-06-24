@@ -30,7 +30,12 @@ commands:
       - run:
           name: install tar gzip
           command: |
-            yum install -y tar gzip
+            yum -y update
+            yum install wget
+            wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+            rpm -ivh epel-release-7-11.noarch.rpm
+            yum repolist
+            yum install ansible
 
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
