@@ -23,9 +23,7 @@ commands:
       - run:
           name: install ansible
           command: | 
-            sudo apt update
-            sudo apt install software-properties-common
-            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo yum update
             sudo apt install ansible
 
 #   revert-migrations:
