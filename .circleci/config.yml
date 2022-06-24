@@ -25,6 +25,13 @@ commands:
           command: | 
             sudo yum update
             sudo yum install ansible
+  install-targzip:
+    description: This command is to install TAR gzip
+    steps:
+      - run:
+          name: install tar gzip
+          command: |
+            sudo yum install -y tar gzip
 
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
@@ -158,6 +165,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - install-targzip
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -177,7 +185,6 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-            yum install -y tar gzip
             BACKEND_PUBLIC_UP=$(aws ec2 describe-instances \
                 --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 --query 'Reservations[*].Instances[*].PublicIpAddress' \
@@ -198,6 +205,7 @@ jobs:
     steps:
       - checkout
       - install-ansible
+      - install-targzip
       - add_ssh_keys:
           fingerprints: ["be:81:27:1e:63:13:cc:41:2c:9f:42:76:e3:8d:76:de"]
       - attach_workspace:
@@ -210,7 +218,6 @@ jobs:
       - run:
           name: Configure server
           command: |
-            yum install -y tar gzip
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
