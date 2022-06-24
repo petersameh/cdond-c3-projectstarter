@@ -225,9 +225,6 @@ jobs:
           at: ~/
       - run:
           name: Install dependencies
-          command: |
-            # Your code here
-            exit 1
       - run:
           name: Configure server
           command: |
@@ -367,11 +364,11 @@ workflows:
           filters:
             branches:
               only: [master]
-      - notify:
-          requires: [deploy-infrastructure]
-          context: variables
       - configure-infrastructure:
           requires: [deploy-infrastructure]
+      - notify:
+          requires: [deploy-infrastructure, configure-infrastructure, test-frontend, test-backend, scan-frontend, scan-backend]
+          context: variables
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
