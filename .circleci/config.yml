@@ -23,7 +23,6 @@ commands:
       - run:
           name: install ansible
           command: | 
-            yum install epel-release
             yum install -y ansible
   install-targzip:
     description: This command is to install TAR gzip
