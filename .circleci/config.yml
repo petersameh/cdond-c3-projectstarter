@@ -202,7 +202,7 @@ jobs:
       - install-ansible
       - add_ssh_keys:
           fingerprints: ["be:81:27:1e:63:13:cc:41:2c:9f:42:76:e3:8d:76:de"]
-      - attach_workspace
+      - attach_workspace:
           at: ~/
       - run:
           name: Install dependencies
@@ -352,8 +352,8 @@ workflows:
       - notify:
           requires: [deploy-infrastructure]
           context: variables
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
