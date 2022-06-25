@@ -338,7 +338,7 @@ jobs:
           command: |
             cd backend
             npm run build
-            tar -czf artifcat.tar.gz dist/* package*
+            tar -czf artifact.tar.gz dist/* package*
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
@@ -447,7 +447,7 @@ workflows:
       - deploy-frontend:
           requires: [run-migrations]
       - deploy-backend:
-          requires: [run-migrations, deploy-frontend]
+          requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
