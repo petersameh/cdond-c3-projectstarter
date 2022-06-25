@@ -290,8 +290,10 @@ jobs:
             aws configure set default.s3.max_concurrent_requests 20
             cd frontend
             npm run build
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*.js"
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.js"
+            echo "Uploading without js and py"
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*.js" --exclude "*.py"
+            echo "uploading only js and py"
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.js" --include "*.py"
 
       - destroy-environment
       - revert-migrations
