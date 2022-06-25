@@ -277,8 +277,10 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - install-targzip-debian
+      - install-node
       - install-aws
+      - install-targzip-debian
+      - install-ansible
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -314,7 +316,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install-node
