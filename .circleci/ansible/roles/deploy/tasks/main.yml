@@ -1,0 +1,26 @@
+- name: "Create directory"
+  file: 
+    path: ~/backend-app
+    state: directory
+
+- name: "Extract backend files"
+  unarchive: 
+    src: artifcat.tar.gz
+    dest: ~/backend-app
+
+- name: "Install node"
+  shell: |
+    cd ~/backend-app
+    npm i
+
+- name: "Execute"
+  shell: |
+    cd ~/backend-app/dist
+    pm2 stop default
+    pm2 start main.js
+  register: execute_node
+
+- name: "configure pm2 service"
+  become: true
+  shell: |
+    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
