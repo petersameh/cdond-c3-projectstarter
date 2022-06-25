@@ -280,7 +280,6 @@ jobs:
       - install-node
       - install-aws
       - install-targzip-debian
-      - install-ansible
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -340,7 +339,7 @@ jobs:
             cd backend
             npm run build
             tar -czf artifcat.tar.gz dist/* package*
-            cd..
+            cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
