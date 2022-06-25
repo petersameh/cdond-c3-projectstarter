@@ -71,6 +71,17 @@ commands:
              npm install
              npm run migration:revert
             fi
+  install-node:
+    description: install node js
+    steps:
+      - run:
+          name: install node js 13
+          command: |
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+            sudo apt install -y nodejs
+
+
+  
             
 jobs:
   notify:
@@ -263,7 +274,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install-targzip-debian
@@ -291,11 +302,11 @@ jobs:
             cd frontend
             npm run build
             echo "Uploading without js and py"
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*.js" --exclude "*.py"
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*.js" --exclude "*.py" --debug
             echo "uploading only js"
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.js"
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.js" --debug
             echo "Uploading only py"
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.py"
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive --exclude "*" --include "*.py" --debug
 
 
       - destroy-environment
@@ -306,6 +317,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - install-node
       - install-aws
       - install-targzip-debian
       - install-ansible
