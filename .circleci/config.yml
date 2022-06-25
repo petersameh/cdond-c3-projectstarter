@@ -300,6 +300,7 @@ jobs:
     steps:
       - checkout
       - install-aws
+      - install-targzip-debian
       - install-ansible
       - add_ssh_keys:
           fingerprints: ["be:81:27:1e:63:13:cc:41:2c:9f:42:76:e3:8d:76:de"]
